@@ -1275,7 +1275,7 @@ jobs:
           fetch-depth: 0
           submodules: 'recursive'
       - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -1619,7 +1619,7 @@ jobs:
           export PATH="$HOME/arm-target/bin:$PATH"
 
           cd ~/arm-target
-          mkdir arm-brew && curl -L https://github.com/Homebrew/brew/tarball/3748bed378401ed75abdf32bcb3d2674d854a6f9 | tar xz --strip 1 -C arm-brew
+          mkdir arm-brew && curl -L https://github.com/Homebrew/brew/tarball/932d2cf3b77c9439a57b6a43577fc8d3b6399a62 | tar xz --strip 1 -C arm-brew
 
           export HOMEBREW_NO_AUTO_UPDATE=1
           export HOMEBREW_CACHE=~/arm-target/brew-cache
