@@ -94,7 +94,7 @@ jobs:
           ref: ${{ env.swig_hash }}
       - run: |
           mkdir -p build-static/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: swig-build-cache
         with:
           path: build-static/
@@ -143,7 +143,7 @@ jobs:
           ref: ${{ env.swig_hash }}
       - run: |
           mkdir -p build-static/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: swig-build-cache
         with:
           path: build-static/
@@ -182,7 +182,7 @@ jobs:
           curl -sSL https://github.com/coqui-ai/STT/releases/download/v0.10.0-alpha.7/sox-14.4.2.tar.bz2 | tar xjf -
       - run: |
           mkdir -p sox-build/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: sox-build-cache
         with:
           path: sox-build/
@@ -435,12 +435,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-headers-cache
         with:
           path: native_client/javascript/headers/nodejs/
           key: node-headers-12.7.0_17.0.1
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-headers-cache
         with:
           path: native_client/javascript/headers/electronjs/
@@ -670,7 +670,7 @@ jobs:
       - run: |
           ls -hal ${{ env.CI_TMP_DIR }}/
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: ~/.npm/
@@ -721,7 +721,7 @@ jobs:
       - run: |
           ls -hal ${{ env.CI_TMP_DIR }}/
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-modules-cache
         with:
           path: ~/.npm/
@@ -1251,7 +1251,7 @@ jobs:
         run: |
           if [[ "${{ startsWith(github.ref, 'refs/tags/') }}" != "true" ]]; then
             # PR build
-            echo "::ccccccccccccccccccccccccccccccccccccccccccccccccccccccc name=tag::dev"
+            echo "tag=dev" >> $GITHUB_OUTPUT
           else
             VERSION="v$(cat VERSION)"
             if [[ "${{ github.ref }}" != "refs/tags/${VERSION}" ]]; then
@@ -1454,7 +1454,7 @@ jobs:
           ref: ${{ env.swig_hash }}
       - run: |
           mkdir -p build-static/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: swig-build-cache
         with:
           path: build-static/
@@ -1604,7 +1604,7 @@ jobs:
       - name: Select Xcode version
         run: |
           sudo xcode-select --switch /Applications/Xcode_13.1.app/Contents/Developer
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cache
         if: matrix.arch == 'arm64'
         with:
@@ -1823,12 +1823,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-headers-cache
         with:
           path: native_client/javascript/headers/nodejs/
           key: node-headers-12.7.0_17.0.1
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-headers-cache
         with:
           path: native_client/javascript/headers/electronjs/
@@ -1955,7 +1955,7 @@ jobs:
       - run: |
           ls -hal ${{ env.CI_TMP_DIR }}/
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: ~/.npm/
@@ -2003,7 +2003,7 @@ jobs:
       - run: |
           ls -hal ${{ env.CI_TMP_DIR }}/
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-modules-cache
         with:
           path: ~/.npm/
@@ -2213,12 +2213,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-headers-cache
         with:
           path: native_client/javascript/headers/nodejs/
           key: node-headers-win-12.7.0_16.0.0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-headers-cache
         with:
           path: native_client/javascript/headers/electronjs/
@@ -2379,7 +2379,7 @@ jobs:
         id: npm-cache-dir
         run: |
           echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
@@ -2443,7 +2443,7 @@ jobs:
         id: npm-cache-dir
         run: |
           echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-modules-cache
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
@@ -2538,7 +2538,7 @@ jobs:
           name: "test-model.tflite-${{ matrix.samplerate }}.zip"
           path: ${{ env.CI_TMP_DIR }}
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: ~/.npm/
@@ -2592,7 +2592,7 @@ jobs:
       - run: |
           ls -hal ${{ env.CI_TMP_DIR }}/
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-modules-cache
         with:
           path: ~/.npm/
@@ -2640,7 +2640,7 @@ jobs:
           name: "test-model.tflite-${{ matrix.samplerate }}.zip"
           path: ${{ env.CI_TMP_DIR }}
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: ~/.npm/
@@ -2692,7 +2692,7 @@ jobs:
       - run: |
           ls -hal ${{ env.CI_TMP_DIR }}/
         if: matrix.models == 'test'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-modules-cache
         with:
           path: ~/.npm/
@@ -2755,7 +2755,7 @@ jobs:
         id: npm-cache-dir
         run: |
           echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
@@ -2820,7 +2820,7 @@ jobs:
         id: npm-cache-dir
         run: |
           echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-modules-cache
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
@@ -3002,12 +3002,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-headers-cache
         with:
           path: native_client/javascript/headers/nodejs/
           key: node-headers-12.7.0_17.0.1
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-headers-cache
         with:
           path: native_client/javascript/headers/electronjs/
@@ -3141,12 +3141,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: node-headers-cache
         with:
           path: native_client/javascript/headers/nodejs/
           key: node-headers-12.7.0_17.0.1
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: electron-headers-cache
         with:
           path: native_client/javascript/headers/electronjs/
